@@ -1,0 +1,139 @@
+/* Container principal */
+.upscaler-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    background-color: #171b25;
+    min-height: 100vh;
+    color: white;
+  }
+
+  /* Titre principal */
+  .upscaler-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+    background: linear-gradient(80deg, #FF8C00, #FF4500, #FF6347, #FF1493);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+  }
+
+  /* Section upload */
+  .upscaler-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .upscaler-upload-label {
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #ff7600, #ff6700);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .upscaler-upload-label:hover {
+    background: linear-gradient(90deg, #ff6700, #ff7600);
+    transform: scale(1.05);
+  }
+
+  .upscaler-upload-input {
+    display: none;
+  }
+
+  /* Preview de l'image */
+  .upscaler-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+  }
+
+  .upscaler-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+  }
+
+  .upscaler-preview-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .upscaler-image {
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Section des options d'upscaling */
+  .upscaler-factors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    text-align: center;
+  }
+
+  .upscaler-factors h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .upscaler-select {
+    padding: 10px;
+    background-color: #1e222b;
+    color: white;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .upscaler-select:focus {
+    outline: none;
+    background-color: #272c36;
+  }
+
+  /* Bouton d'upscaling */
+  .upscaler-btn {
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #ff7600, #ff6700);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .upscaler-btn:disabled {
+    background: #555555;
+    cursor: not-allowed;
+  }
+
+  .upscaler-btn:hover:not(:disabled) {
+    background: linear-gradient(90deg, #ff6700, #ff7600);
+    transform: scale(1.05);
+  }
+
+  .upscaler-btn.loading {
+    cursor: wait;
+  }
+
+  /* Résultat de l'image upscale */
+  .upscaler-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .upscaler-result-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }

@@ -1,0 +1,53 @@
+.personal-feed-card {
+    max-width: 345px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+  }
+
+  .personal-feed-card:hover {
+    transform: scale(1.02);
+  }
+
+  .personal-feed-card-media {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .personal-feed-card-content {
+    padding: 15px;
+  }
+
+  .personal-feed-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .personal-feed-card-prompt {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .personal-feed-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 15px;
+  }
+
+  .personal-feed-delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .personal-feed-delete-btn:hover {
+    background-color: #c0392b;
+  }

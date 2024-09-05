@@ -1,0 +1,95 @@
+/* Container principal */
+.createpost-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background-color: #171b25;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Barre de titre et prompt */
+.createpost-header {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.createpost-input {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  background-color: #1e222b;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.createpost-input:focus {
+  outline: none;
+  background-color: #272c36;
+}
+
+/* Bouton pour générer l'image */
+.createpost-generate-btn {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #ff7600, #ff6700);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.createpost-generate-btn:disabled {
+  background: #555555;
+  cursor: not-allowed;
+}
+
+.createpost-generate-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff6700, #ff7600);
+  transform: scale(1.05);
+}
+
+.createpost-generate-btn.loading {
+  cursor: wait;
+}
+
+/* Aperçu de l'image générée */
+.createpost-image-preview {
+  margin-top: 30px;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.createpost-image-preview img {
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Bouton pour sauvegarder le post */
+.createpost-submit-btn {
+  margin-top: 40px;
+  padding: 14px 24px;
+  background: linear-gradient(90deg, #ff7600, #ff6700);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.createpost-submit-btn:disabled {
+  background: #555555;
+  cursor: not-allowed;
+}
+
+.createpost-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff6700, #ff7600);
+  transform: scale(1.05);
+}

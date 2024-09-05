@@ -11,6 +11,7 @@ import styleRoutes from './routes/styleRoutes.js';
 import formatRoutes from './routes/formatRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import categorieFormat from './routes/categorieFormatRoutes.js';
+import interestRoutes from './routes/interestRoutes.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use('/api/v1/style', styleRoutes);
 app.use('/api/v1/format', formatRoutes);
 app.use('/api/v1/categorieFormat', categorieFormat);
 app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/interest', interestRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');

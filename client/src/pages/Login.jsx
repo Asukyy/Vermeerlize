@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Login.css';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -23,45 +23,47 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (data.success) {
-        onLogin(data.user, data.token);
+        onLogin(data.user, data.token); // Passe les données utilisateur et le token à App
+        navigate('/'); // Redirige vers la page d'accueil
       } else {
-        console.error('Login failed:', data.message);
+        setError('Login failed: ' + data.message);
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      setError('An error occurred: ' + error.message);
     }
   };
 
   return (
-    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Login
-      </Typography>
-      {error && <Typography color="error">{error}</Typography>}
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Email"
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Login
-        </Button>
-      </form>
-      <Typography variant="body2" sx={{ mt: 2 }}>
-        Don't have an account? <Link href="/register">Register</Link>
-      </Typography>
-    </Box>
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Login</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="login-button">Login</button>
+        </form>
+        <p className="register-link">
+          Don't have an account? <a href="/register">Register</a>
+        </p>
+      </div>
+    </div>
   );
 };
 

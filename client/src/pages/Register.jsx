@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Register.css';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -37,50 +37,54 @@ const Register = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Register
-      </Typography>
-      {error && <Typography color="error">{error}</Typography>}
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Name"
-          margin="normal"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Email"
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Confirm Password"
-          type="password"
-          margin="normal"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Register
-        </Button>
-      </form>
-      <Typography variant="body2" sx={{ mt: 2 }}>
-        Already have an account? <Link href="/login">Login</Link>
-      </Typography>
-    </Box>
+    <div className="register-container">
+      <div className="register-box">
+        <h2>Register</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="register-button">Register</button>
+        </form>
+        <p className="login-link">
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
+    </div>
   );
 };
 

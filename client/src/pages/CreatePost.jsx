@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
-import ImageIcon from '@mui/icons-material/Image';
-import SaveIcon from '@mui/icons-material/Save';
+import '../styles/CreatePost.css'; // Nouveau fichier CSS
 
 const CreatePost = ({ user }) => {
   const [form, setForm] = useState({
@@ -13,7 +11,6 @@ const CreatePost = ({ user }) => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -49,7 +46,6 @@ const CreatePost = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     if (form.prompt && form.imageUrl) {
       setLoading(true);
       try {
@@ -68,7 +64,7 @@ const CreatePost = ({ user }) => {
 
         const result = await response.json();
         if (response.ok) {
-          navigate('/');
+          navigate('/personal-feed');
         } else {
           alert(result.message || 'Something went wrong');
         }
@@ -83,70 +79,48 @@ const CreatePost = ({ user }) => {
     }
   };
 
-
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-      <Card sx={{ maxWidth: 600, p: 3 }}>
-        <CardContent>
-          <Typography variant="h4" component="h1" gutterBottom textAlign="center">
-            Create a New Post
-          </Typography>
+    <div className="createpost-container">
+      <div className="createpost-header">
+        <input
+          type="text"
+          placeholder="Enter Title"
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          className="createpost-input"
+        />
+        <input
+          type="text"
+          placeholder="Enter Prompt"
+          name="prompt"
+          value={form.prompt}
+          onChange={handleChange}
+          className="createpost-input"
+        />
+        <button
+          onClick={handleGenerateImage}
+          className={`createpost-generate-btn ${generatingImg ? 'loading' : ''}`}
+          disabled={generatingImg}
+        >
+          {generatingImg ? 'Generating...' : 'Generate Image'}
+        </button>
+      </div>
 
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="Title"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="title"
-              value={form.title}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              label="Prompt"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="prompt"
-              value={form.prompt}
-              onChange={handleChange}
-              required
-            />
+      {form.imageUrl && (
+        <div className="createpost-image-preview">
+          <img src={form.imageUrl} alt="Generated" />
+        </div>
+      )}
 
-            <Box display="flex" justifyContent="center" mt={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<ImageIcon />}
-                onClick={handleGenerateImage}
-                disabled={generatingImg}
-              >
-                {generatingImg ? <CircularProgress size={24} /> : 'Generate Image'}
-              </Button>
-            </Box>
-
-            {form.imageUrl && (
-              <Box display="flex" justifyContent="center" mt={2}>
-                <img src={form.imageUrl} alt="Generated" style={{ maxWidth: '100%', borderRadius: '8px' }} />
-              </Box>
-            )}
-
-            <Box display="flex" justifyContent="center" mt={4}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                startIcon={<SaveIcon />}
-                disabled={loading || !form.imageUrl}
-              >
-                {loading ? <CircularProgress size={24} /> : 'Save Post'}
-              </Button>
-            </Box>
-          </form>
-        </CardContent>
-      </Card>
-    </Box>
+      <button
+        onClick={handleSubmit}
+        className="createpost-submit-btn"
+        disabled={loading || !form.imageUrl}
+      >
+        {loading ? 'Saving...' : 'Save Post'}
+      </button>
+    </div>
   );
 };
 

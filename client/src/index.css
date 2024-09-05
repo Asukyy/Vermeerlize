@@ -17,6 +17,8 @@
     width: 15px;
 }
 
+.container{ max-width: max-content;}
+
 ::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 }
@@ -25,5 +27,19 @@
     background-color: #cccccc;
 
 }
+
+.titre-spe {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(80deg, #FF8C00, #FF4500, #FF6347, #FF1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: block;
+    margin-bottom: 20px;
+    padding: 5px 20px;
+}
+
 
 

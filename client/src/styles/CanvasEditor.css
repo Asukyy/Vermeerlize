@@ -1,0 +1,70 @@
+.canvas-editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #181818;
+    color: #FFFFFF;
+    height: 100vh;
+    padding: 20px;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #282828;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tool-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toolbar button {
+    padding: 8px 12px;
+    background-color: #FF8C00;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toolbar button:hover {
+    background-color: #e67e00;
+  }
+
+  .toolbar input[type="color"] {
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .toolbar input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    outline: none;
+  }
+
+  .canvas-container {
+    width: 800px;
+    height: 600px;
+    background-color: #1D1D1D;
+    border: 1px solid #444;
+    position: relative;
+  }
+
+  .sample-canvas {
+    width: 100%;
+    height: 100%;
+  }

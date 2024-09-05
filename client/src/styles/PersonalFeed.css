@@ -1,0 +1,168 @@
+.personal-feed-container {
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .personal-feed-title {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(80deg, #FF8C00, #FF4500, #FF6347, #FF1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: block;
+    margin-bottom: 20px;
+    padding: 5px 0px;
+  }
+
+  .personal-feed-description {
+    color: #ff9800;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .personal-feed-filters {
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .personal-feed-search-bar {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 1rem;
+    border-radius: 10px;
+    /* background: linear-gradient(80deg, #FF8C00, #FF4500, #FF6347, #FF1493); */
+  }
+
+  .personal-feed-dropdown {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ff9800;
+    border-radius: 4px;
+    background-color: white;
+    color: #ff6f00;
+    margin-right: 10px;
+  }
+
+  .personal-feed-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .personal-feed-filter-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .personal-feed-filter-btn:hover {
+    background-color: #e65100;
+  }
+
+  .personal-feed-loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+  }
+
+  .personal-feed-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #ff6f00;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    animation: personal-feed-spin 1s linear infinite;
+  }
+
+  @keyframes personal-feed-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .personal-feed-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .personal-feed-grid-item {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .personal-feed-gallery-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .personal-feed-gallery-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .personal-feed-no-results {
+    color: #999;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .personal-feed-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .personal-feed-dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .personal-feed-dialog-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .personal-feed-delete-btn,
+  .personal-feed-close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .personal-feed-delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    margin-right: 10px;
+  }
+
+  .personal-feed-close-btn {
+    background-color: #3498db;
+    color: white;
+  }

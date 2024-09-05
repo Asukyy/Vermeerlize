@@ -1,0 +1,26 @@
+.modal-popup {
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 0;
+    transition: top 0.5s ease, opacity 0.5s ease;
+}
+
+.modal-popup.success {
+    background-color: #4CAF50; /* Couleur pour succès */
+}
+
+.modal-popup.error {
+    background-color: #f44336; /* Couleur pour échec */
+}
+
+.modal-popup.visible {
+    top: 20px;
+    opacity: 1;
+}

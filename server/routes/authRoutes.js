@@ -1,56 +1,135 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
+import cloudinary from '../config/cloudinaryConfig.js';
 import dotenv from 'dotenv';
 import User from '../mongodb/models/User.js';
 import { authenticateToken, authenticateAdmin } from '../middleware/authMiddleware.js';
+import path from 'path';
+import fs from 'fs';
+import mongoose from 'mongoose';
+
 
 dotenv.config();
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Nom du fichier unique
+  },
+});
 
-router.put('/profile', authenticateToken, async (req, res) => {
-  const { name, email, password, avatar } = req.body;
-  const userId = req.user.id; // L'ID de l'utilisateur provient du token JWT
+const upload = multer({ storage: storage });
+
+router.put('/profile', authenticateToken, upload.single('profilePicture'), async (req, res) => {
+  const userId = req.user?.id;
+  if (!userId) return res.status(401).json({ success: false, message: 'User ID not found' });
+
+  const { username, email, showExplicitContent, interests } = req.body;
 
   try {
-      const user = await User.findById(userId);
-      if (!user) {
+      let updatedData = {
+          name: username,
+          email,
+          showExplicitContent: showExplicitContent === 'true',
+      };
+
+      // Gestion de l'upload de l'image de profil
+      if (req.file) {
+          const result = await cloudinary.uploader.upload(req.file.path);
+          console.log('Cloudinary upload result:', result);
+
+          updatedData.avatar = result.secure_url;
+
+          fs.unlinkSync(req.file.path); // Suppression du fichier temporaire
+      }
+
+      let validInterests = [];
+      if (interests) {
+          try {
+              const interestsArray = JSON.parse(interests); // Convertir la chaîne JSON en tableau
+              validInterests = interestsArray
+                  .map(id => mongoose.Types.ObjectId.isValid(id) ? new mongoose.Types.ObjectId(id) : null) // Utiliser 'new' pour instancier ObjectId
+                  .filter(id => id !== null);
+          } catch (error) {
+              console.error('Error parsing interests:', error);
+              return res.status(400).json({ success: false, message: 'Invalid interests format' });
+          }
+      }
+
+
+      updatedData.interests = validInterests;
+
+      const updatedUser = await User.findByIdAndUpdate(userId, updatedData, { new: true, runValidators: true });
+
+      if (!updatedUser) {
           return res.status(404).json({ success: false, message: 'User not found' });
       }
 
-      if (name) user.name = name;
-      if (email) user.email = email;
-      if (avatar) user.avatar = avatar;
-
-      if (password) {
-          const hashedPassword = await bcrypt.hash(password, 10);
-          user.password = hashedPassword;
-      }
-
-      await user.save();
-      res.status(200).json({ success: true, message: 'Profile updated successfully', user });
-  } catch (err) {
-      console.error('Profile update error:', err);
-      res.status(500).json({ success: false, message: 'Unable to update profile' });
+      res.json({ success: true, user: updatedUser });
+  } catch (error) {
+      console.error('Error updating user:', error);
+      res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+
 
 router.get('/profile', authenticateToken, async (req, res) => {
   const userId = req.user.id;
 
   try {
-      const user = await User.findById
-      (userId);
-      if (!user) {
-          return res.status(404).json({ success: false, message: 'User not found' });
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.error('Profile fetch error:', err);
+    res.status(500).json({ success: false, message: 'Unable to fetch profile' });
+  }
+});
+
+router.delete('/delete-account', authenticateToken, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      await User.findByIdAndDelete(userId);
+      res.status(200).json({ message: 'Account deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting account:', error);
+      res.status(500).json({ message: 'Failed to delete account' });
+  }
+});
+
+router.put('/change-password', authenticateToken, async (req, res) => {
+  try {
+      const { newPassword } = req.body;
+
+      const userId = req.user.id;
+
+      if (!userId) {
+          return res.status(400).json({ message: 'User ID is missing.' });
       }
 
-      res.status(200).json({ success: true, user });
-  } catch (err) {
-      console.error('Profile fetch error:', err);
-      res.status(500).json({ success: false, message: 'Unable to fetch profile' });
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).json({ message: 'User not found.' });
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      user.password = hashedPassword;
+      await user.save();
+
+      res.status(200).json({ message: 'Password changed successfully.' });
+  } catch (error) {
+      console.error('Error changing password:', error);
+      res.status(500).json({ message: 'Failed to change password.' });
   }
 });
 
