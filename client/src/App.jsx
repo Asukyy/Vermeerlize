@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { CreatePost, Home, Login, Register, Subscribe, Stats, Payment, PaymentSuccess,
    PaymentCancel, Profile, ChangePassword, AccountManagement, PersonalFeed, UniversalUpscaler,
-  CanvasEditor } from './pages';
+  CanvasEditor, RealtimeGeneration } from './pages';
 import Sidebar from './components/Sidebar/Sidebar';
 import CreatePostSidebar from './components/Sidebar/CreatePostSidebar';
 
@@ -51,7 +51,7 @@ const MainApp = ({ user, onLogout, onLogin }) => {
 
   const publicRoutes = ['/login', '/register'];
 
-  const hideSidebarRoutes = ['/login', '/register'];
+  const hideSidebarRoutes = ['/login', '/register', '/payment', '/payment-success', '/payment-cancel', '/canvas-editor'];
   const isCreatePostPage = location.pathname === '/create-post';
 
   const shouldShowSidebar = !hideSidebarRoutes.includes(location.pathname);
@@ -83,6 +83,7 @@ const MainApp = ({ user, onLogout, onLogin }) => {
               <Route path="/personal-feed" element={<PersonalFeed user={user} />} />
               <Route path="/universal-upscaler" element={<UniversalUpscaler />} />
               <Route path="/canvas-editor" element={<CanvasEditor />} />
+              <Route path="/realtime-generation" element={<RealtimeGeneration />} />
             </Route>
           </Routes>
         </main>

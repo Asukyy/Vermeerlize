@@ -13,9 +13,10 @@ import Stats from "./Stats";
 import PersonalFeed from "./PersonalFeed";
 import UniversalUpscaler from "./UniversalUpscaler";
 import CanvasEditor from "./CanvasEditor";
+import RealtimeGeneration from "./RealtimeGeneration";
 
 export { Home, CreatePost, Login, Register, Subscribe,
      Payment, PaymentSuccess, PaymentCancel, Profile, Stats,
       ChangePassword, AccountManagement, PersonalFeed, UniversalUpscaler,
-      CanvasEditor
+      CanvasEditor, RealtimeGeneration
     };

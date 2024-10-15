@@ -207,7 +207,6 @@ input:checked + .slider:before {
     align-items: center;
 }
 
-.createpost-save-btn,
 .createpost-reset-btn {
     padding: 10px 15px;
     background-color: #171b25;
@@ -215,6 +214,7 @@ input:checked + .slider:before {
     border: none;
     cursor: pointer;
     transition: background 0.3s ease, border 0.3s ease;
+    margin: auto;
 }
 
 .createpost-save-btn {

@@ -81,13 +81,13 @@ const Sidebar = ({ onLogout }) => {
   return (
     <div className="container">
       <div className="sidebar">
-        <div className="logo">
+        {/* <div className="logo">
           <Link to="/">
             <img src={logo} alt="Logo" className="logo-image" />
             <h1><span>V</span>ermeerlize</h1>
           </Link>
-        </div>
-        <hr className="line-side"></hr>
+        </div> */}
+        {/* <hr className="line-side"></hr> */}
         {user && (
           <div className="profile" onClick={handleMenuClick} style={{ cursor: 'pointer' }}>
             <div className="profile-pic">
@@ -131,7 +131,6 @@ const Sidebar = ({ onLogout }) => {
         <li onClick={() => navigate('/personal-feed')}><p className="list-side"><PersonIcon />Personal Feed</p></li>
         <li className="onclickNone"><span>AI Tools</span></li>
         <li onClick={() => navigate('/create-post')}><p className="list-side"><ImageIcon />Image Creation</p></li>
-        <li onClick={() => navigate('/realtime-canvas')}><p className="list-side"><BrushIcon />Realtime Canvas</p></li>
         <li onClick={() => navigate('/realtime-generation')}><p className="list-side"><GenerateIcon />Realtime Generation</p></li>
         <li onClick={() => navigate('/canvas-editor')}><p className="list-side"><EditIcon />Canvas Editor</p></li>
         <li onClick={() => navigate('/universal-upscaler')}><p className="list-side"><ExpandIcon />Universal Upscaler</p></li>

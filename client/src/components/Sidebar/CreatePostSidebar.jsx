@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/Sidebar.css';
 import '../../styles/CreatePostSidebar.css';
+import logo from '../../assets/logo.png';
 
 const CreatePostSidebar = () => {
   const [generationMode, setGenerationMode] = useState('fast');
@@ -46,10 +47,13 @@ const CreatePostSidebar = () => {
 
   return (
     <div className="createpost-sidebar">
-      <div className="createpost-back-btn" onClick={handleRedirect}>
-        ← Back to Home
-      </div>
-
+              <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="logo-image" />
+            <h1><span>V</span>ermeerlize</h1>
+          </Link>
+        </div>
+        <hr className="line-side"></hr>
       <div className="createpost-title">Preset</div>
 
       <div className="createpost-dropdown createpost-item">
@@ -150,7 +154,6 @@ const CreatePostSidebar = () => {
       </div>
 
       <div className="createpost-actions">
-        <button className="createpost-save-btn" onClick={handleSave}>Save</button>
         <button className="createpost-reset-btn" onClick={handleReset}>Reset to Defaults</button>
       </div>
     </div>
